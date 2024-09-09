@@ -1,0 +1,9 @@
+{
+	"name": "faudeDF",
+	"location": "northeurope",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "4f7667f5-ce40-4694-b8f9-c97f2e4d8fa0",
+		"tenantId": "b151f115-5207-42ae-b86c-8988dfd778a0"
+	}
+}
