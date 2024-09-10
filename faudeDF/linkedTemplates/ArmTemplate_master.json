@@ -1,0 +1,70 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "faudeDF"
+		},
+		"FauDeAzureDataLakeStorage_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'FauDeAzureDataLakeStorage'"
+		},
+		"FauDeSnowflake_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'FauDeSnowflake'"
+		},
+		"FauDeAzureDataLakeStorage_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://faudestorageaccount.dfs.core.windows.net/"
+		},
+		"FauDeSnowflake_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "sales_mart"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "faudeDF_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"FauDeAzureDataLakeStorage_accountKey": {
+						"value": "[parameters('FauDeAzureDataLakeStorage_accountKey')]"
+					},
+					"FauDeSnowflake_password": {
+						"value": "[parameters('FauDeSnowflake_password')]"
+					},
+					"FauDeAzureDataLakeStorage_properties_typeProperties_url": {
+						"value": "[parameters('FauDeAzureDataLakeStorage_properties_typeProperties_url')]"
+					},
+					"FauDeSnowflake_properties_typeProperties_database": {
+						"value": "[parameters('FauDeSnowflake_properties_typeProperties_database')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
