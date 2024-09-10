@@ -9,7 +9,7 @@
 						"referenceName": "SourceSalesData",
 						"type": "DatasetReference"
 					},
-					"name": "FaueDeSourceSales"
+					"name": "FauDeSourceSales"
 				}
 			],
 			"sinks": [
@@ -44,11 +44,11 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> FaueDeSourceSales",
-				"FaueDeSourceSales filter(SALES>=2000) ~> FauDeFilter",
+				"     ignoreNoFilesFound: false) ~> FauDeSourceSales",
+				"FauDeSourceSales filter(SALES>=2000) ~> FauDeFilter",
 				"FauDeFilter aggregate(groupBy(MONTH_ID,",
 				"          YEAR_ID),",
-				"     Total_Sales = sum(SALES)) ~> FauDeAggregate",
+				"     TOTALSALES = sum(SALES)) ~> FauDeAggregate",
 				"FauDeAggregate sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     input(",
@@ -61,6 +61,8 @@
 				"     updateable:false,",
 				"     upsertable:false,",
 				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
 				"     stageInsert: true) ~> FauDeSinkSnowflake"
 			]
 		}
