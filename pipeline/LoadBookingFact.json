@@ -24,7 +24,7 @@
 							"referenceName": "AirBnBADLS",
 							"type": "LinkedServiceReference"
 						},
-						"folderPath": "airbnb/customer_raw_data"
+						"folderPath": "airbnb/customer_archive"
 					},
 					"compute": {
 						"coreCount": 8,
