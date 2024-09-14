@@ -20,10 +20,6 @@
 						"type": "DataFlowReference"
 					},
 					"staging": {
-						"linkedService": {
-							"referenceName": "AirBnBADLS",
-							"type": "LinkedServiceReference"
-						},
 						"folderPath": "airbnb/customer_archive"
 					},
 					"compute": {
