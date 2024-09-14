@@ -16,14 +16,17 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "SalesDataTransformationFlow",
+						"referenceName": "BookingDataTransformation",
 						"type": "DataFlowReference"
 					},
 					"compute": {
 						"coreCount": 8,
 						"computeType": "General"
 					},
-					"traceLevel": "Fine"
+					"traceLevel": "Fine",
+					"continuationSettings": {
+						"customizedCheckpointKey": "ffec1f48-8701-47a7-916f-a44046239be3"
+					}
 				}
 			}
 		],
