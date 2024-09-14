@@ -15,11 +15,45 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
+					"dataflow": {
+						"referenceName": "BookingDataTransformation",
+						"type": "DataFlowReference"
+					},
 					"compute": {
 						"coreCount": 8,
 						"computeType": "General"
 					},
-					"traceLevel": "Fine"
+					"traceLevel": "Fine",
+					"continuationSettings": {
+						"customizedCheckpointKey": "d6de4432-804d-4729-92b1-628f69797027"
+					}
+				}
+			},
+			{
+				"name": "Stored procedure",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Dataflow",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[airbnb].[BookingAggregation]"
+				},
+				"linkedServiceName": {
+					"referenceName": "SynapseDWH",
+					"type": "LinkedServiceReference"
 				}
 			}
 		],
