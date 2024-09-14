@@ -1,0 +1,14 @@
+{
+	"name": "SynapseDWH",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDW",
+		"typeProperties": {
+			"server": "faudesynapse.sql.azuresynapse.net",
+			"database": "AirBnB_DWH",
+			"encrypt": "mandatory",
+			"trustServerCertificate": true,
+			"authenticationType": "SystemAssignedManagedIdentity"
+		}
+	}
+}
