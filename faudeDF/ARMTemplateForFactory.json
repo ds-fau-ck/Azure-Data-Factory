@@ -131,13 +131,7 @@
 									"SynapseFactWrite": {}
 								}
 							},
-							"staging": {
-								"linkedService": {
-									"referenceName": "AirBnBADLS",
-									"type": "LinkedServiceReference"
-								},
-								"folderPath": "airbnb/customer_archive"
-							},
+							"staging": {},
 							"compute": {
 								"coreCount": 8,
 								"computeType": "General"
@@ -183,7 +177,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/dataflows/BookingDataTransformation')]",
-				"[concat(variables('factoryId'), '/linkedServices/AirBnBADLS')]",
 				"[concat(variables('factoryId'), '/linkedServices/SynapseDWH')]"
 			]
 		},
@@ -1028,10 +1021,10 @@
 						"          timestamp as timestamp",
 						"     ),",
 						"     allowSchemaDrift: true,",
-						"     validateSchema: false,",
+						"     validateSchema: true,",
 						"     isolationLevel: 'READ_UNCOMMITTED',",
 						"     format: 'table',",
-						"     staged: true) ~> SynapseForLookup",
+						"     staged: false) ~> SynapseForLookup",
 						"BookingData split(check_out_date<check_in_date,",
 						"     disjoint: false) ~> DataQualityCheck@(BadRecords, AcceptedRecords)",
 						"DataQualityCheck@AcceptedRecords derive(stay_duration = (toTimestamp(check_out_date)-toTimestamp(check_in_date))/86400000,",
@@ -1103,8 +1096,7 @@
 						"     upsertable:false,",
 						"     keys:['booking_id'],",
 						"     format: 'table',",
-						"     staged: true,",
-						"     allowCopyCommand: true,",
+						"     staged: false,",
 						"     skipDuplicateMapInputs: true,",
 						"     skipDuplicateMapOutputs: true,",
 						"     errorHandlingOption: 'stopOnFirstError') ~> SynapseFactWrite"
