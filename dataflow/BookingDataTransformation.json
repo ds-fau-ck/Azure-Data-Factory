@@ -87,7 +87,7 @@
 				"          timestamp as timestamp",
 				"     ),",
 				"     allowSchemaDrift: true,",
-				"     validateSchema: false,",
+				"     validateSchema: true,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table',",
 				"     staged: false) ~> SynapseForLookup",
