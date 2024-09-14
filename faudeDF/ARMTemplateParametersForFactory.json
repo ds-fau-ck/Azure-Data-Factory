@@ -5,17 +5,29 @@
 		"factoryName": {
 			"value": "faudeDF"
 		},
+		"CosmosDBNew_connectionString": {
+			"value": ""
+		},
 		"FauDeAzureDataLakeStorage_accountKey": {
 			"value": ""
 		},
 		"FauDeSnowflake_password": {
 			"value": ""
 		},
+		"AirBnBADLS_properties_typeProperties_url": {
+			"value": "https://faudeairbnb.dfs.core.windows.net/"
+		},
 		"FauDeAzureDataLakeStorage_properties_typeProperties_url": {
 			"value": "https://faudestorageaccount.dfs.core.windows.net/"
 		},
 		"FauDeSnowflake_properties_typeProperties_database": {
 			"value": "sales_mart"
+		},
+		"SynapseDWH_properties_typeProperties_server": {
+			"value": "faudesynapse.sql.azuresynapse.net"
+		},
+		"SynapseDWH_properties_typeProperties_database": {
+			"value": "AirBnB_DWH"
 		}
 	}
 }

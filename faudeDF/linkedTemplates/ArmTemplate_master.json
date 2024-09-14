@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "faudeDF"
 		},
+		"CosmosDBNew_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'CosmosDBNew'"
+		},
 		"FauDeAzureDataLakeStorage_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'FauDeAzureDataLakeStorage'"
@@ -15,6 +19,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'FauDeSnowflake'"
 		},
+		"AirBnBADLS_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://faudeairbnb.dfs.core.windows.net/"
+		},
 		"FauDeAzureDataLakeStorage_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://faudestorageaccount.dfs.core.windows.net/"
@@ -22,6 +30,14 @@
 		"FauDeSnowflake_properties_typeProperties_database": {
 			"type": "string",
 			"defaultValue": "sales_mart"
+		},
+		"SynapseDWH_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "faudesynapse.sql.azuresynapse.net"
+		},
+		"SynapseDWH_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "AirBnB_DWH"
 		},
 		"containerUri": {
 			"type": "string",
@@ -39,7 +55,7 @@
 		{
 			"name": "faudeDF_ArmTemplate_0",
 			"type": "Microsoft.Resources/deployments",
-			"apiVersion": "2018-02-01",
+			"apiVersion": "2024-03-01",
 			"properties": {
 				"mode": "incremental",
 				"templateLink": {
@@ -50,17 +66,29 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"CosmosDBNew_connectionString": {
+						"value": "[parameters('CosmosDBNew_connectionString')]"
+					},
 					"FauDeAzureDataLakeStorage_accountKey": {
 						"value": "[parameters('FauDeAzureDataLakeStorage_accountKey')]"
 					},
 					"FauDeSnowflake_password": {
 						"value": "[parameters('FauDeSnowflake_password')]"
 					},
+					"AirBnBADLS_properties_typeProperties_url": {
+						"value": "[parameters('AirBnBADLS_properties_typeProperties_url')]"
+					},
 					"FauDeAzureDataLakeStorage_properties_typeProperties_url": {
 						"value": "[parameters('FauDeAzureDataLakeStorage_properties_typeProperties_url')]"
 					},
 					"FauDeSnowflake_properties_typeProperties_database": {
 						"value": "[parameters('FauDeSnowflake_properties_typeProperties_database')]"
+					},
+					"SynapseDWH_properties_typeProperties_server": {
+						"value": "[parameters('SynapseDWH_properties_typeProperties_server')]"
+					},
+					"SynapseDWH_properties_typeProperties_database": {
+						"value": "[parameters('SynapseDWH_properties_typeProperties_database')]"
 					}
 				}
 			},
