@@ -3,11 +3,51 @@
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
-			"sources": [],
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "BookingDataCosmos",
+						"type": "DatasetReference"
+					},
+					"name": "BookingData"
+				}
+			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "DataQualityCheck"
+				},
+				{
+					"name": "DerivedColumns"
+				}
+			],
 			"scriptLines": [
-				""
+				"source(output(",
+				"          booking_id as string,",
+				"          property_id as string,",
+				"          customer_id as integer,",
+				"          owner_id as string,",
+				"          check_in_date as string,",
+				"          check_out_date as string,",
+				"          booking_date as string,",
+				"          amount as double,",
+				"          currency as string,",
+				"          property_location as (city as string, country as string),",
+				"          timestamp as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     enableChangeFeed: true,",
+				"     changeFeedStartFromTheBeginning: false,",
+				"     format: 'document') ~> BookingData",
+				"BookingData split(check_out_date<check_in_date,",
+				"     disjoint: false) ~> DataQualityCheck@(BadRecords, AcceptedRecords)",
+				"DataQualityCheck@AcceptedRecords derive(Stay_duration = (toTimestamp(check_out_date)-toTimestamp(check_in_date))/86400000,",
+				"          column2 = ERROR_FUNCTION(''),",
+				"          column3 = ERROR_FUNCTION(''),",
+				"          column4 = ERROR_FUNCTION(''),",
+				"          column5 = ERROR_FUNCTION(''),",
+				"          column6 = ERROR_FUNCTION('')) ~> DerivedColumns"
 			]
 		}
 	}
