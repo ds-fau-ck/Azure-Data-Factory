@@ -1,0 +1,10 @@
+{
+	"name": "AirBnBADLS",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://faudeairbnb.dfs.core.windows.net/"
+		}
+	}
+}
